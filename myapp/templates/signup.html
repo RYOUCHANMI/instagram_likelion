@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'myapp/css/login.css'%}">
+<link rel="shortcut icon" href="{% static 'myapp/imgs/instagram.png'%}">
+{% endblock %}
+{% block content %}
+
+<div id="main_container">
+
+    <div class="form_container">
+
+        <div class="form">
+
+
+            <h1 class="sprite_insta_big_logo title"></h1>
+
+
+            <form method='POST'>
+                {% csrf_token %}
+                <p class="login_user_name">
+                    <label for="user_name">사용자명:</label>
+                    {{ form.username }}
+                </p>
+
+                <p class="login_user_password">
+                    <label for="user_password">비밀번호:</label>
+                    {{ form.password }}
+                </p>
+
+                <p class="login_user_email">
+                    <label for="user_email">이메일:</label>
+                    {{ form.email }}
+                </p>
+
+                <p class="login_user_nickname">
+                    <label for="user_nickname">닉네임:</label>
+                    {{ form.nickname }}
+                </p>
+
+                <p class="login_user_phone_number">
+                    <label for="user_phone_number">핸드폰 번호:</label>
+                    {{ form.phone_number }}
+                </p>
+
+                <input type="submit" id="submit_btn" value="회원가입" class="submit_btn">
+            </form>
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+</div>
+{% endblock %}

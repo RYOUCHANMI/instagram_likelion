@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'myapp/css/profile.css'%}">
+<link rel="shortcut icon" href="{% static 'myapp/imgs/instagram.png'%}">
+{% endblock %}
+
+{% block content %}
+<section id="container">
+
+
+
+    <div id="main_container">
+
+        <section class="b_inner">
+
+            <div class="hori_cont">
+                <div class="profile_wrap">
+                    <div class="profile_img">
+                        <img src="{% static 'myapp/imgs/thumb.jpeg' %}" alt="프로필사진">
+                    </div>
+                </div>
+
+                <div class="detail">
+                    <div class="top">
+                        <div class="user_name">{{ n_user.username }}</div>
+                        <a href="profile_edit.html" class="profile_edit">프로필편집</a>
+                        <a href="#" class="logout">로그아웃</a>
+                    </div>
+
+                    <ul class="middle">
+                        <li>
+                            <span>게시물</span>
+                            {{posts.count}}
+                        </li>
+                        <li>
+                            <span>팔로워</span>
+                            50
+                        </li>
+                        <li>
+                            <span>팔로우</span>
+                            50
+                        </li>
+                    </ul>
+                    <p class="about">
+                        <span class="nick_name">닉네임 : {{ n_user.nickname }}</span>
+                        <span class="book_mark">이메일 : {{ n_user.email }}</span>
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="mylist_contents contents_container active">
+                {% for post in posts %}
+                <div class="pic">
+                    <p>Title : {{post.title}} <br>
+                        Place : {{post.place}}</p>
+                    <br>
+                    {% if post.image %}
+                    <a href="#"><img src="{{ post.image.url }}" alt=""></a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+
+
+
+
+        </section>
+    </div>
+
+
+</section>
+
+
+<!--<script src="js/insta.js"></script>-->
+<script src="js/profile.js"></script>
+<script>
+</script>
+{% endblock %}

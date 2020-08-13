@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'myapp/css/new_post.css' %}">
+<link rel="shortcut icon" href="{% static 'myapp/imgs/instagram.png' %}">
+{% endblock %}
+
+{% block content %}
+
+ 
+<div id="main_container">
+
+    <div class="post_form_container">
+        <form class="post_form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="title">
+                NEW POST
+            </div>
+            <div class="preview">
+                <div class="upload">
+                    <div class="post_btn">
+                        <p>포스트 이미지 추가</p>
+                        <canvas id="imageCanvas"></canvas>
+                        <!--<p><img id="img_id" src="#" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>-->
+                    </div>
+                </div>
+            </div>
+            <p>
+                {{form.image}}
+            </p>
+            <p>
+                <label for="user_name">Title:</label>
+                {{form.title}}
+                <br>
+                <label for="user_name">Place:</label>
+                {{form.place}}
+                <br>
+                <label for="user_name">Hashtag:</label>
+                {{form.hashtag_field}}
+
+            </p>
+            <input class="submit_btn" type="submit" value="업로드">
+        </form>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<script src="js/insta.js"></script>
+
+<script>
+   var fileInput  = document.querySelector( "#id_photo" ),
+       button     = document.querySelector( ".input-file-trigger" ),
+       the_return = document.querySelector(".file-return");
+
+   // Show image
+   fileInput.addEventListener('change', handleImage, false);
+   var canvas = document.getElementById('imageCanvas');
+   var ctx = canvas.getContext('2d');
+
+
+    function handleImage(e){
+       var reader = new FileReader();
+       reader.onload = function(event){
+           var img = new Image();
+           // var imgWidth =
+           img.onload = function(){
+               canvas.width = 300;
+               canvas.height = 300;
+               ctx.drawImage(img,0,0,300,300);
+           };
+           img.src = event.target.result;
+           // img.width = img.width*0.5
+           // canvas.height = img.height;
+       };
+       reader.readAsDataURL(e.target.files[0]);
+   }
+
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+<section id="container">
+
+    
+
+  <div class="hidden_menu">
+      <div class="scroll_inner">
+          <div class="user">
+              <div class="thumb_img"><img src="{% static 'myapp/imgs/thumb.jpeg' %}" alt="프로필사진"></div>
+              <div class="id">kindtigerrr</div>
+          </div>
+
+          <div class="user">
+              <div class="thumb_img"><img src="{% static 'myapp/imgs/thumb.jpeg' %}" alt="프로필사진"></div>
+              <div class="id">kindtigerrr</div>
+          </div>
+          <div class="user">
+              <div class="thumb_img"><img src="{% static 'myapp/imgs/thumb.jpeg' %}" alt="프로필사진"></div>
+              <div class="id">kindtigerrr</div>
+          </div>
+          <div class="user">
+              <div class="thumb_img"><img src="{% static 'myapp/imgs/thumb.jpeg' %}" alt="프로필사진"></div>
+              <div class="id">kindtigerrr</div>
+          </div>
+          <div class="user">
+              <div class="thumb_img"><img src="{% static 'myapp/imgs/thumb.jpeg' %}" alt="프로필사진"></div>
+              <div class="id">kindtigerrr</div>
+          </div>
+          <div class="user">
+              <div class="thumb_img"><img src="{% static 'myapp/imgs/thumb.jpeg' %}" alt="프로필사진"></div>
+              <div class="id">kindtigerrr</div>
+          </div>
+          <div class="user">
+              <div class="thumb_img"><img src="{% static 'myapp/imgs/thumb.jpeg' %}" alt="프로필사진"></div>
+              <div class="id">kindtigerrr</div>
+          </div>
+          <div class="user">
+              <div class="thumb_img"><img src="{% static 'myapp/imgs/thumb.jpeg' %}" alt="프로필사진"></div>
+              <div class="id">kindtigerrr</div>
+          </div>
+          <div class="user">
+              <div class="thumb_img"><img src="{% static 'myapp/imgs/thumb.jpeg' %}" alt="프로필사진"></div>
+              <div class="id">kindtigerrr</div>
+          </div>
+          <div class="user">
+              <div class="thumb_img"><img src="{% static 'myapp/imgs/thumb.jpeg' %}" alt="프로필사진"></div>
+              <div class="id">kindtigerrr</div>
+          </div>
+
+      </div>
+  </div>
+
+
+  <section id="main_container">
+      <div class="inner">
+
+          <div class="contents_box">
+
+            {% for post in hashtag.post_set.all %}
+              <article class="contents">
+                  <header class="top">
+                      <div class="user_container">
+                        {% if post.image %}  
+                        <div class="profile_img">
+                              <img src="{{ post.image.url }}" alt="프로필이미지">
+                          </div>
+                        {% endif %}
+                          <div class="user_name">
+                              <div class="nick_name m_text">{{ post.writer }}</div>
+                              <div class="country s_text">{{ post.place }}</div>
+                          </div>
+
+                      </div>
+
+                      <div class="sprite_more_icon" data-name="more">
+                          <ul class="toggle_box">
+                             <li><input type="submit" class="follow" value="팔로우" data-name="follow"></li>
+                              <li>수정</li>
+                              <li>삭제</li>
+                          </ul>
+                      </div>
+                  </header>
+                  {% if post.image %}
+                  <div class="img_section">
+                      <div class="trans_inner">
+                          <div><img src="{{ post.image.url }}" alt="visual01"></div>
+                      </div>
+                  </div>
+                  {% endif %}
+                  <div class="bottom_icons">
+                      <div class="left_icons">
+                          <div class="heart_btn">
+                              <div class="sprite_heart_icon_outline" name="39" data-name="heartbeat"></div>
+                          </div>
+                          <div class="sprite_bubble_icon"></div>
+                          <div class="sprite_share_icon" data-name="share"></div>
+                      </div>
+                      <div class="right_icon">
+                          <div class="sprite_bookmark_outline" data-name="bookmark"></div>
+                      </div>
+                  </div>
+
+                  <div class="likes m_text">
+                      좋아요
+                      <span id="like-count-39">{{post.likes.count}}</span>
+                      <span id="bookmark-count-39"></span>
+                      개
+                  </div>
+
+                  <div class="comment_container">
+                      <div class="comment" id="comment-list-ajax-post37">
+                          <div class="comment-detail">
+                              <div class="nick_name m_text">{{ post.writer }}</div>
+                              <div>{{ post.title }}</div>
+                              
+                          </div>
+                              <p>
+                              {% for hashtag in post.hashtags.all %}
+                              <a href="/hashtag/{{hashtag.name}}">#{{ hashtag.name }}</a>
+                              {% endfor %}
+                            </p>
+                      </div>
+
+                     
+
+                      <div class="small_heart">
+                        <a href="{% url 'like' pk=post.pk %}">
+                          {% if user in post.likes.all %}
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                            </svg>
+                          {% else %}
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            </svg>
+                          {% endif %}
+                        </a>
+                      </div>
+                  </div>
+                  
+                  {% for comment in post.comments.all %}
+                  <div class="comment_container">
+                    <div class="comment" id="comment-list-ajax-post37">
+                        <div class="comment-detail">
+                            <div class="nick_name m_text">{{ comment.c_writer }}</div>
+                            <div>{{ comment.text }}</div>
+                        </div>
+                    </div>
+                 </div>
+                  {% endfor %}
+                  
+                  <div class="timer">1시간 전</div>
+
+                  <div class="comment_field" id="add-comment-post37">
+                    <form action='comment/{{post.id}}' method='POST'>
+                      {% csrf_token %}
+                      {{ comment_form.text }}
+                      <div class="upload_btn m_text" data-name="comment">
+                        <input type='submit' value="게시">
+                      </div>
+                    </form>
+                  </div>
+              </article>
+            {% endfor %}
+
+
+          </div>
+          <input type="hidden" id="page" value="1">
+
+          <div class="side_box">
+              <div class="user_profile">
+                  <div class="profile_thumb">
+                      <img src="{% static 'myapp/imgs/thumb.jpeg' %}" alt="프로필사진">
+                  </div>
+                  <div class="detail">
+                      <div class="id m_text">{{ hashtag.name }} 태그가 속한 글이다</div>
+                  </div>
+              </div>
+
+          </div>
+
+
+      </div>
+  </section>
+
+
+
+</section>
+{% endblock %}
